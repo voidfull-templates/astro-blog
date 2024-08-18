@@ -1,0 +1,37 @@
+---
+import {clsx} from "clsx";
+---
+
+<header class="flex justify-between items-center">
+  <div>
+    <a href={'/'} class="flex items-center space-x-4">
+      <img
+        src="/voidfull.svg"
+        alt="voidfull logo"
+        class="w-8 h-8"
+        aria-hidden="true"
+      />
+      <span class="sr-only">Voidfull</span>
+      <p class="text-xl font-semibold">Blog</p>
+    </a>
+  </div>
+
+  <ul class="list-none">
+    <li>
+      <a
+        class={clsx(
+          "flex items-center justify-between",
+          "space-x-2 text-dark-blue",
+          "rounded-lg px-2.5 py-1",
+          "hover:bg-white/25 focus:bg-white/25 focus:outline-none",
+        )}
+        href={
+          'https://voidfull.com?utm_source=blog&utm_medium=navbar&utm_content=go_to_homepage'
+        }
+        rel="noreferrer noopener"
+      >
+        Go to Homepage ↗
+      </a>
+    </li>
+  </ul>
+</header>

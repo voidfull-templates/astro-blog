@@ -1,0 +1,30 @@
+---
+import { clsx } from "clsx";
+import { ArrowRight } from "lucide-astro"
+
+interface Props {
+  title: string;
+  description?: string;
+  href: string;
+}
+
+const { href, title, description } = Astro.props;
+---
+
+<a
+  href={href}
+  class={clsx(
+    "group rounded-lg border border-transparent px-3 py-2 transition-colors",
+    "hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30",
+  )}
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <h2 class="text-xl font-semibold">
+    {title}{" "}
+    <ArrowRight
+      class={clsx("inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none", "w-5 h-5 stroke-[3px]")}
+    /> 
+  </h2>
+  {description ? <p class="mt-1 text-sm text-gray-500">{description}</p> : null}
+</a>

@@ -1,0 +1,42 @@
+---
+import { clsx } from 'clsx';
+
+import { Client as Voidfull } from '../lib/voidfull';
+
+import BaseLayout from '../layouts/Base.astro';
+import VoidfullWelcome from "../components/Voidfull/Root.astro"
+import { PostCardContent } from '../components/Post/PostCardContent';
+import { PostCardImage } from '../components/Post/PostCardImage';
+
+const data = await Voidfull.sites.posts.list();
+---
+
+<BaseLayout description="A place for you read anytime and anywhere." url="https://blog.verbals.io/">
+  <section class="max-w-6xl mx-auto px-4">
+    <hr class="border-gray-200 mb-12" />
+
+    <section class={clsx("my-10")}>
+      <VoidfullWelcome />
+    </section>
+
+    {/* Posts */}
+    <div class='grid gap-10 md:grid-cols-2'>
+      {data.posts.filter((item) => item.publishedAt !== null).map(post => (
+        <article class={clsx("grid gap-4", "group")}>
+          {post.featureImage ? <PostCardImage
+            title={post.title}
+            slug={post.slug}
+            featureImage={post.featureImage}
+          /> : null}
+
+          <PostCardContent
+            title={post.title}
+            slug={post.slug}
+            excerpt={post.excerpt}
+            publishedAt={post.publishedAt}
+          />
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

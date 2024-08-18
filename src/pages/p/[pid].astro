@@ -1,0 +1,108 @@
+---
+import { clsx } from 'clsx';
+import { Interweave } from 'interweave';
+import { polyfill } from 'interweave-ssr';
+import { BookOpenIcon } from 'lucide-react';
+import dayjs from 'dayjs';
+import type { Post } from '@voidfull/js-sdk';
+
+import { Client as Voidfull } from '../../lib/voidfull';
+
+// components
+import BaseLayout from '../../layouts/Base.astro';
+// import { ShareDropdown } from '';
+
+export async function getStaticPaths() {
+  const data = await Voidfull.sites.posts.list();
+
+  return (data.posts || [])
+    .filter((item) => item.publishedAt !== null && item.slug !== null)
+    .map((item) => ({
+      params: {
+        pid: item.slug,
+      },
+      props: item,
+    }));
+}
+
+interface Props extends Post {}
+
+const { title, featureImage, content, slug, publishedAt, timeToRead, excerpt } =
+  Astro.props;
+const url = `https://blog.verbals.io/p/${slug}`;
+
+const baseImageArr = featureImage?.split('-') || [];
+const imageSize = baseImageArr[baseImageArr.length - 1];
+const imageExtension = imageSize?.split('.')[1];
+
+baseImageArr.splice(baseImageArr.length - 1, 1);
+const baseImagePrefix = baseImageArr.join('-');
+
+polyfill();
+---
+
+<BaseLayout title={title} description={excerpt} image={featureImage ?? null} url={url}>
+  <div class="max-w-6xl mx-auto">
+    <hr class="border-gray-200 mb-12" />
+
+    <div class="md:py-12">
+      <div
+        class={clsx("mx-auto max-w-screen-md", "px-4 md:px-8 xl:px-5", "pb-8")}
+      >
+        <div>
+          <h1
+            class={clsx("mb-3 mt-2", "text-center text-3xl font-semibold lg:text-4xl", "tracking-tight lg:leading-snug")}
+          >
+            {title}
+          </h1>
+
+          <!-- Info Bar -->
+          <div class={clsx(" flex justify-between", "border-y border-black/20 py-3 my-4 px-2 mt-6 space-x-3 text-gray-500")}>
+            <div class="flex items-center gap-3">
+              <div>
+                <div class="flex items-center space-x-2 text-sm">
+                  <p class="sr-only">Published on</p>
+                  <time
+                    class="text-gray-500 dark:text-gray-400"
+                    datetime="2022-10-21T15:48:00.000Z"
+                  >
+                    {dayjs(publishedAt).format("MMM DD, YYYY")}
+                  </time>
+                  {timeToRead ? (
+                    <span>·</span>
+                    <span class="flex items-center gap-2">
+                      <BookOpenIcon className="w-4 h-4" /> {timeToRead} min read</span>
+                    ) : null}
+                </div>
+              </div>
+            </div>
+
+            <div>
+              Share
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section class={clsx('max-w-3xl mx-auto')}>
+        {featureImage ? <figure class="">
+          <img
+            class="md:rounded-2xl border border-gray-200"
+            srcset={[
+              `${baseImagePrefix}-w600.${imageExtension} 600w`,
+              `${baseImagePrefix}-w1200.${imageExtension} 1200w`,
+            ].join()}
+            src={`${baseImagePrefix}-w600.${imageExtension}`}
+            alt={title}
+            sizes="(min-width: 1280px) 1280px"
+            loading="lazy"
+          />
+        </figure> : null}
+
+        <div class={clsx("prose lg:prose-lg !leading-6 lg:!leading-7","max-w-none", 'p-8')}>
+          <Interweave content={content} />
+        </div>
+      </section>
+    </div>
+  </div>
+</BaseLayout>

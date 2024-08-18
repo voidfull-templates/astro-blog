@@ -1,0 +1,26 @@
+---
+import { clsx } from "clsx";
+
+import Checklist from "./Checklist.astro";
+import ReferenceLinks from "./ReferenceLinks.astro";
+---
+
+<div class={clsx("border border-gray-300 rounded-lg", "bg-gray-50")}>
+  <div class={clsx("px-4 pt-2", "text-xs text-gray-500 text-right")}>
+    This is welcome guide from Voidfull.
+  </div>
+
+  <div
+    class={clsx(
+      "grid md:grid-cols-2 md:gap-x-12",
+      "divide-x divide-gray-300",
+      "p-8",
+    )}
+  >
+    <ul class="text-sm">
+      <Checklist />
+    </ul>
+
+    <ReferenceLinks />
+  </div>
+</div>

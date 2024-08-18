@@ -1,0 +1,19 @@
+---
+import { clsx } from "clsx";
+
+import Item from "./ReferenceLinkItem.astro";
+---
+
+<div class={clsx("grid pl-12")}>
+  <Item
+    href="https://voidfull.com"
+    title="Learn"
+    description="Learn about Voidfull features."
+  />
+
+  <Item
+    href="https://github.com/voidfull-templates"
+    title="Templates"
+    description="Explore starter templates for Voidfull."
+  />
+</div>

@@ -1,0 +1,70 @@
+---
+import Header from '../components/Header.astro';
+import { Footer } from '../components/Footer';
+
+interface Props {
+  title?: string;
+  description: string;
+  url: string;
+  image?: string | null;
+}
+
+const { title, description, url, image } = Astro.props;
+
+const seoTitle = `${title ? `${title} - ` : ''}Verbals Blog`;
+
+const isProd = import.meta.env.PUBLIC_NODE_ENV === 'production';
+---
+
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <link rel="icon" type="image/svg+xml" href="/favicon.ico"/>
+  <meta name="viewport" content="width=device-width"/>
+  <meta name="generator" content={Astro.generator}/>
+
+  <title>{seoTitle}</title>
+
+  <link rel="canonical" href={url}/>
+
+  <meta name="description" content={description}/>
+  <meta property="url" content={url}/>
+
+  <meta name="robots" content="index, follow"/>
+  {isProd ? <link rel="sitemap" href="/sitemap-index.xml" /> : null}
+
+  <meta property="og:title" content={seoTitle}/>
+  <meta property="og:description" content={description}/>
+  <meta property="og:url" content={url}/>
+  <meta property="og:site_name" content="Verbals"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:locale" content="en_US"/>
+  {image ? <meta name="og:image" content={image}/> : null}
+
+  <meta name="twitter:title" content={seoTitle}/>
+  <meta name="twitter:description" content={description}/>
+  <meta name="twitter:url" content={url}/>
+  {image ? <meta name="twitter:image" content={image}/> : null}
+  <meta name="twitter:site" content="@VerbalsHQ"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+
+  <link rel="alternate" type="application/rss+xml" title="Verbals Blogs" href="https://blog.verbals.io/rss.xml" />
+</head>
+
+<body>
+{/* Hero section */}
+<div class="max-w-6xl mx-auto px-4">
+  <div class="py-4 lg:py-8">
+    <Header/>
+  </div>
+</div>
+
+<slot/>
+
+<div class="px-5 md:px-8 py-12 mt-12">
+  <div class="max-w-6xl mx-auto">
+    <Footer/>
+  </div>
+</div>
+</body>
+</html>
