@@ -1,6 +1,7 @@
 ---
 import Header from '../components/Header.astro';
 import { Footer } from '../components/Footer';
+import { config } from '../../config';
 
 interface Props {
   title?: string;
@@ -11,7 +12,7 @@ interface Props {
 
 const { title, description, url, image } = Astro.props;
 
-const seoTitle = `${title ? `${title} - ` : ''}Verbals Blog`;
+const seoTitle = `${title ? `${title} - ` : ''}${config.title}`;
 
 const isProd = import.meta.env.PUBLIC_NODE_ENV === 'production';
 ---
@@ -36,7 +37,7 @@ const isProd = import.meta.env.PUBLIC_NODE_ENV === 'production';
   <meta property="og:title" content={seoTitle}/>
   <meta property="og:description" content={description}/>
   <meta property="og:url" content={url}/>
-  <meta property="og:site_name" content="Verbals"/>
+  {config.openGraphSiteName ? <meta property="og:site_name" content={config.openGraphSiteName} /> : null}
   <meta property="og:type" content="website"/>
   <meta property="og:locale" content="en_US"/>
   {image ? <meta name="og:image" content={image}/> : null}
@@ -45,10 +46,10 @@ const isProd = import.meta.env.PUBLIC_NODE_ENV === 'production';
   <meta name="twitter:description" content={description}/>
   <meta name="twitter:url" content={url}/>
   {image ? <meta name="twitter:image" content={image}/> : null}
-  <meta name="twitter:site" content="@VerbalsHQ"/>
+  {config?.twitterUsername ? <meta name="twitter:site" content={config.twitterUsername} />: null}
   <meta name="twitter:card" content="summary_large_image"/>
 
-  <link rel="alternate" type="application/rss+xml" title="Verbals Blogs" href="https://blog.verbals.io/rss.xml" />
+  <link rel="alternate" type="application/rss+xml" title={config.title} href={`${config.site}/rss.xml`} />
 </head>
 
 <body>

@@ -49,3 +49,5 @@ pnpm dev
 ```
 
 Navigate to `http://localhost:4321` to open the site your browser.
+
+You can modify the `config.ts` file in the root of this directory.

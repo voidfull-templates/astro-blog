@@ -1,8 +1,9 @@
-import rss, { type RSSOptions } from '@astrojs/rss';
+import rss from '@astrojs/rss';
 
+import { config } from '../../config.ts';
 import { Client as Voidfull } from '../lib/voidfull.ts';
 
-export async function GET(context: RSSOptions) {
+export async function GET() {
   const data = await Voidfull.sites.posts.list();
 
   const feedGeneratedAt = import.meta.env.FEED_GENERATION_DATE;
@@ -14,14 +15,14 @@ export async function GET(context: RSSOptions) {
       atom: 'http://www.w3.org/2005/Atom',
       media: 'http://search.yahoo.com/mrss/',
     },
-    title: 'Verbals Blog',
-    description: 'Blog posts from the Verbals team',
-    site: context.site,
+    title: config.title,
+    description: config.description,
+    site: config.site,
     customData:
       `
       <language>en</language>
-      <atom:link href="${context.site}/rss.xml" rel="self" type="application/rss+xml"/>
-      <link href="${context.site}" rel="alternate" type="text/html"/>` +
+      <atom:link href="${config.site}/rss.xml" rel="self" type="application/rss+xml"/>
+      <link href="${config.site}" rel="alternate" type="text/html"/>` +
       `${
         typeof feedGeneratedAt !== 'undefined'
           ? `<lastBuildDate>${feedGeneratedAt}</lastBuildDate>`
@@ -29,9 +30,9 @@ export async function GET(context: RSSOptions) {
       }
       <copyright>Copyright © ${new Date().getFullYear()} CodeCarrot. All rights reserved.</copyright>
       <ttl>60</ttl>
-      <image><url>${context.site}/favicon.ico</url>\n
-      <title>Verbals Blog</title>\n
-      <link>${context.site}</link></image>
+      <image><url>${config.site}/favicon.ico</url>\n
+      <title>${config.title}</title>\n
+      <link>${config.site}</link></image>
       <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     `,
     trailingSlash: false,

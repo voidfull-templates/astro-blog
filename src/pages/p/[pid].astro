@@ -6,6 +6,7 @@ import { BookOpenIcon } from 'lucide-react';
 import dayjs from 'dayjs';
 import type { Post } from '@voidfull/js-sdk';
 
+import { config } from '../../../config';
 import { Client as Voidfull } from '../../lib/voidfull';
 
 // components
@@ -29,7 +30,7 @@ interface Props extends Post {}
 
 const { title, featureImage, content, slug, publishedAt, timeToRead, excerpt } =
   Astro.props;
-const url = `https://blog.verbals.io/p/${slug}`;
+const url = `${config.site}/p/${slug}`;
 
 const baseImageArr = featureImage?.split('-') || [];
 const imageSize = baseImageArr[baseImageArr.length - 1];

@@ -1,6 +1,7 @@
 ---
 import { clsx } from 'clsx';
 
+import { config } from '../../config';
 import { Client as Voidfull } from '../lib/voidfull';
 
 import BaseLayout from '../layouts/Base.astro';
@@ -11,7 +12,7 @@ import { PostCardImage } from '../components/Post/PostCardImage';
 const data = await Voidfull.sites.posts.list();
 ---
 
-<BaseLayout description="A place for you read anytime and anywhere." url="https://blog.verbals.io/">
+<BaseLayout description="A place for you read anytime and anywhere." url={config.site}>
   <section class="max-w-6xl mx-auto px-4">
     <hr class="border-gray-200 mb-12" />
 
