@@ -1,7 +1,7 @@
 ---
-import Header from '../components/Header.astro';
-import { Footer } from '../components/Footer';
-import { config } from '../../config';
+import Header from "../components/Header.astro";
+import { Footer } from "../components/Footer";
+import { config } from "../../config";
 
 interface Props {
   title?: string;
@@ -12,60 +12,73 @@ interface Props {
 
 const { title, description, url, image } = Astro.props;
 
-const seoTitle = `${title ? `${title} - ` : ''}${config.title}`;
+const seoTitle = `${title ? `${title} - ` : ""}${config.title}`;
 
-const isProd = import.meta.env.PUBLIC_NODE_ENV === 'production';
+const isProd = import.meta.env.PUBLIC_NODE_ENV === "production";
 ---
 
 <html lang="en">
-<head>
-  <meta charset="utf-8"/>
-  <link rel="icon" type="image/svg+xml" href="/favicon.ico"/>
-  <meta name="viewport" content="width=device-width"/>
-  <meta name="generator" content={Astro.generator}/>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
 
-  <title>{seoTitle}</title>
+    <title>{seoTitle}</title>
 
-  <link rel="canonical" href={url}/>
+    <link rel="canonical" href={url} />
 
-  <meta name="description" content={description}/>
-  <meta property="url" content={url}/>
+    <meta name="description" content={description} />
+    <meta property="url" content={url} />
 
-  <meta name="robots" content="index, follow"/>
-  {isProd ? <link rel="sitemap" href="/sitemap-index.xml" /> : null}
+    <meta name="robots" content="index, follow" />
+    {isProd ? <link rel="sitemap" href="/sitemap-index.xml" /> : null}
 
-  <meta property="og:title" content={seoTitle}/>
-  <meta property="og:description" content={description}/>
-  <meta property="og:url" content={url}/>
-  {config.openGraphSiteName ? <meta property="og:site_name" content={config.openGraphSiteName} /> : null}
-  <meta property="og:type" content="website"/>
-  <meta property="og:locale" content="en_US"/>
-  {image ? <meta name="og:image" content={image}/> : null}
+    <meta property="og:title" content={seoTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={url} />
+    {
+      config.openGraphSiteName ? (
+        <meta property="og:site_name" content={config.openGraphSiteName} />
+      ) : null
+    }
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    {image ? <meta name="og:image" content={image} /> : null}
 
-  <meta name="twitter:title" content={seoTitle}/>
-  <meta name="twitter:description" content={description}/>
-  <meta name="twitter:url" content={url}/>
-  {image ? <meta name="twitter:image" content={image}/> : null}
-  {config?.twitterUsername ? <meta name="twitter:site" content={config.twitterUsername} />: null}
-  <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:title" content={seoTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:url" content={url} />
+    {image ? <meta name="twitter:image" content={image} /> : null}
+    {
+      config?.twitterUsername ? (
+        <meta name="twitter:site" content={config.twitterUsername} />
+      ) : null
+    }
+    <meta name="twitter:card" content="summary_large_image" />
 
-  <link rel="alternate" type="application/rss+xml" title={config.title} href={`${config.site}/rss.xml`} />
-</head>
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={config.title}
+      href={`${config.site}/rss.xml`}
+    />
+  </head>
 
-<body>
-{/* Hero section */}
-<div class="max-w-6xl mx-auto px-4">
-  <div class="py-4 lg:py-8">
-    <Header/>
-  </div>
-</div>
+  <body>
+    {/* Hero section */}
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="py-4 lg:py-8">
+        <Header />
+      </div>
+    </div>
 
-<slot/>
+    <slot />
 
-<div class="px-5 md:px-8 py-12 mt-12">
-  <div class="max-w-6xl mx-auto">
-    <Footer/>
-  </div>
-</div>
-</body>
+    <div class="px-5 md:px-8 py-12 mt-12">
+      <div class="max-w-6xl mx-auto">
+        <Footer />
+      </div>
+    </div>
+  </body>
 </html>

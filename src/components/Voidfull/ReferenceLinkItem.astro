@@ -1,6 +1,6 @@
 ---
 import { clsx } from "clsx";
-import { ArrowRight } from "lucide-astro"
+import { ArrowRight } from "lucide-astro";
 
 interface Props {
   title: string;
@@ -23,8 +23,11 @@ const { href, title, description } = Astro.props;
   <h2 class="text-xl font-semibold">
     {title}{" "}
     <ArrowRight
-      class={clsx("inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none", "w-5 h-5 stroke-[3px]")}
-    /> 
+      class={clsx(
+        "inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none",
+        "w-5 h-5 stroke-[3px]",
+      )}
+    />
   </h2>
   {description ? <p class="mt-1 text-sm text-gray-500">{description}</p> : null}
 </a>

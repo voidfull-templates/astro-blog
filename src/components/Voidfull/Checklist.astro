@@ -25,10 +25,7 @@ const missingVars = Object.values(vars).filter((value) => !value).length;
         >
           {
             missingVars > 0 ? (
-              <TriangleAlert
-                aria-hidden={true}
-                class="h-4 w-4 text-white"
-              />
+              <TriangleAlert aria-hidden={true} class="h-4 w-4 text-white" />
             ) : (
               <Check aria-hidden={true} class="h-4 w-4 text-white" />
             )
