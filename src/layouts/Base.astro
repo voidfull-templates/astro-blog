@@ -13,8 +13,6 @@ interface Props {
 const { title, description, url, image } = Astro.props;
 
 const seoTitle = `${title ? `${title} - ` : ""}${config.title}`;
-
-const isProd = import.meta.env.PUBLIC_NODE_ENV === "production";
 ---
 
 <html lang="en">
@@ -32,7 +30,7 @@ const isProd = import.meta.env.PUBLIC_NODE_ENV === "production";
     <meta property="url" content={url} />
 
     <meta name="robots" content="index, follow" />
-    {isProd ? <link rel="sitemap" href="/sitemap-index.xml" /> : null}
+    {import.meta.env.PROD ? <link rel="sitemap" href="/sitemap-index.xml" /> : null}
 
     <meta property="og:title" content={seoTitle} />
     <meta property="og:description" content={description} />
