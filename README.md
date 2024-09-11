@@ -1,6 +1,6 @@
 ## Voidfull Astro Blog template
 
-[![./images/voidfull-astro-blog-template-image.jpg](Voidfull Astro template blog post preview screenshot)](https://astro-blog-template.voidfull.com)
+[![Voidfull Astro template blog post preview screenshot](./images/voidfull-astro-blog-template-image.jpg)](https://astro-blog-template.voidfull.com)
 
 Preview: [astro-blog-template.voidfull.com](https://astro-blog-template.voidfull.com)
 
