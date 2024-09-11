@@ -1,5 +1,7 @@
 ## Voidfull Astro Blog template
 
+[![Voidfull Astro template blog post preview screenshot](./images/voidfull-astro-blog-template-image.jpg)](https://astro-blog-template.voidfull.com)
+
 Preview: [astro-blog-template.voidfull.com](https://astro-blog-template.voidfull.com)
 
 Use this template to quickly get started by creating a Blog for your own Product / Company using [Voidfull](https://voidfull.com).
