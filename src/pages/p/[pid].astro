@@ -4,19 +4,52 @@ import { Interweave } from 'interweave';
 import { polyfill } from 'interweave-ssr';
 import { BookOpenIcon } from 'lucide-react';
 import dayjs from 'dayjs';
-import type { Post } from '@voidfull/js-sdk';
+// Remove dependency on Voidfull SDK types
+// import type { Post } from '@voidfull/js-sdk';
 
 import { config } from '../../../config';
-import { Client as Voidfull } from '../../lib/voidfull';
+// Remove dependency on Voidfull SDK
+// import { Client as Voidfull } from '../../lib/voidfull';
 
 // components
 import BaseLayout from '../../layouts/Base.astro';
 // import { ShareDropdown } from '';
 
-export async function getStaticPaths() {
-  const data = await Voidfull.sites.posts.list();
+// Define our own Post type
+interface Post {
+  title: string;
+  slug: string;
+  content?: string;
+  excerpt?: string;
+  publishedAt: string;
+  timeToRead?: number;
+  featureImage?: string | null;
+}
 
-  return (data.posts || [])
+export async function getStaticPaths() {
+  // Define demo posts instead of using Voidfull API
+  const demoPosts: Post[] = [
+    {
+      title: "Getting Started with Astro",
+      slug: "getting-started",
+      excerpt: "Learn how to build lightning-fast websites with Astro.",
+      content: "<p>Astro is a modern static site builder that allows you to build faster websites with less JavaScript. It lets you use your favorite JavaScript framework but renders your site to static HTML at build time.</p><h2>Why Choose Astro?</h2><p>Astro offers several advantages:</p><ul><li>Incredible performance by default</li><li>Less client-side JavaScript</li><li>Framework-agnostic</li><li>Great developer experience</li></ul>",
+      publishedAt: new Date().toISOString(),
+      timeToRead: 5,
+      featureImage: null
+    },
+    {
+      title: "Why Astro is Great for Blogs",
+      slug: "astro-for-blogs",
+      excerpt: "Discover the benefits of using Astro for your blog sites.",
+      content: "<p>When it comes to building a blog, performance and SEO are critical. Astro excels in both areas, making it an excellent choice for your blog.</p><h2>SEO Benefits</h2><p>Astro sites are fully rendered to HTML at build time, meaning search engines can easily crawl and index your content. Additionally, Astro's minimal JavaScript approach results in fast load times, which is a key ranking factor.</p><h2>Content Focus</h2><p>With Astro, you can focus on your content without worrying about complex client-side state management. Write your posts in Markdown and let Astro handle the rest.</p>",
+      publishedAt: new Date().toISOString(),
+      timeToRead: 7,
+      featureImage: null
+    }
+  ];
+
+  return demoPosts
     .filter((item) => item.publishedAt !== null && item.slug !== null)
     .map((item) => ({
       params: {
