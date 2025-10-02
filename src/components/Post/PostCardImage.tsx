@@ -1,9 +1,17 @@
 import { clsx } from 'clsx';
-import type { Post } from '@voidfull/js-sdk';
+// Remove dependency on Voidfull SDK types
+// import type { Post } from '@voidfull/js-sdk';
 
 import type { OnlyRequired } from '../../env';
 
 type RequiredProps = 'title' | 'slug' | 'featureImage';
+
+// Define our own Post type
+interface Post {
+  title: string;
+  slug: string;
+  featureImage: string | null;
+}
 
 export const PostCardImage = ({
   title,

@@ -12,13 +12,13 @@ interface Config extends OnlyRequired<AstroUserConfig, 'site'> {
 const config: Config = {
   // Site title
   // Used in meta tags and RSS configuration
-  title: "My site",
+  title: "Dealo Blog",
   // Site description
   // Used in meta tags and RSS configuration
-  description: "My blogging site built with Astro using Voidfull.",
-  site: 'https://voidfull.com',
-  twitterUsername: "@GetVoidfull",
-  openGraphSiteName: "Voidfull"
+  description: "The official blog for Dealo - Latest news, updates, and insights.",
+  site: 'https://blog.dealo.app',
+  twitterUsername: "@dealoapp",
+  openGraphSiteName: "Dealo Blog"
 }
 
 export { config }

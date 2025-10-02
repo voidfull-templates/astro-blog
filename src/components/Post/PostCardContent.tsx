@@ -1,11 +1,21 @@
 import { useMemo } from 'react';
 import { clsx } from 'clsx';
 import dayjs from 'dayjs';
-import type { Post } from '@voidfull/js-sdk';
+// Remove dependency on Voidfull SDK types
+// import type { Post } from '@voidfull/js-sdk';
 
 import type { OnlyRequired } from '../../env';
 
 type RequiredProps = 'title' | 'slug' | 'excerpt' | 'publishedAt';
+
+// Define our own Post type
+interface Post {
+  title: string;
+  slug: string;
+  excerpt: string;
+  publishedAt: string;
+  featureImage?: string | null;
+}
 
 interface Props extends OnlyRequired<Post, RequiredProps> {
   firstPost?: boolean;

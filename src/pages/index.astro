@@ -2,14 +2,34 @@
 import { clsx } from "clsx";
 
 import { config } from "../../config";
-import { Client as Voidfull } from "../lib/voidfull";
+// Replace Voidfull API with static data
+// import { Client as Voidfull } from "../lib/voidfull";
 
 import BaseLayout from "../layouts/Base.astro";
 import VoidfullWelcome from "../components/Voidfull/Root.astro";
 import { PostCardContent } from "../components/Post/PostCardContent";
 import { PostCardImage } from "../components/Post/PostCardImage";
 
-const data = await Voidfull.sites.posts.list();
+// Use static demo data instead of API call
+// const data = await Voidfull.sites.posts.list();
+const demoData = {
+  posts: [
+    {
+      title: "Getting Started with Astro",
+      slug: "getting-started",
+      excerpt: "Learn how to build lightning-fast websites with Astro.",
+      publishedAt: new Date().toISOString(),
+      featureImage: null
+    },
+    {
+      title: "Why Astro is Great for Blogs",
+      slug: "astro-for-blogs",
+      excerpt: "Discover the benefits of using Astro for your blog sites.",
+      publishedAt: new Date().toISOString(),
+      featureImage: null
+    }
+  ]
+};
 ---
 
 <BaseLayout
@@ -26,7 +46,7 @@ const data = await Voidfull.sites.posts.list();
     {/* Posts */}
     <div class="grid gap-10 md:grid-cols-2">
       {
-        data.posts
+        demoData.posts
           .filter((item) => item.publishedAt !== null)
           .map((post) => (
             <article class={clsx("grid gap-4", "group")}>
